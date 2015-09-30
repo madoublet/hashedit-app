@@ -1,6 +1,11 @@
 # Logs
 logs
 *.log
+config.js
+credentials.md
+
+# Public
+public/*
 
 # Runtime data
 pids
