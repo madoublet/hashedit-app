@@ -10,11 +10,11 @@ exports.google = {
     "clientId": "GOOGLE_CLIENT_ID",
     "clientSecret": "GOOGLE_CLIENT_SECRET"
 };
-  
+
 // setup authorized users
 exports.authorized = [
-    {
-		"email": "sample@gmail.com",
-		"provider": "google"
-	}
+{
+    "email": "sample@gmail.com",
+    "provider": "google"
+}
 ];
