@@ -6,8 +6,8 @@ Static Spark is an API backend for hashedit.io.  It provides authentication and 
 
 ##### 1. Create a directory for your NodeJS site.
 ```
-mkdir my-app
-cd my-app
+mkdir my-site
+cd my-site
 ```
 
 ##### 2. Clone the repository into your folder structure.
@@ -22,7 +22,7 @@ cp config.sample.js config.js
 nano config.js
 ```
 
-##### 4. Install dependencies
+##### 4. Install Node JS dependencies
 ```
 npm install
 ```
@@ -35,5 +35,5 @@ bower install hashedit
 ##### 6. Start your server
 ```
 cd ..
-DEBUG=static-spark npm start
+DEBUG=my-site npm start
 ```
