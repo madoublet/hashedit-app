@@ -39,6 +39,7 @@ app.use(cookieParser());
 
 // setup static directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 // setup session
 app.use(session({
