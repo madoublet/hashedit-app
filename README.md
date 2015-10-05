@@ -1,13 +1,13 @@
 # Static Spark
 
-Static Spark is an API backend for hashedit.io.  It provides authentication and features to manipulate your static site.  Static Spark is written in Node JS.
+Static Spark is an API backend for hashedit.io.  It provides authentication and features to manipulate your static site.  Static Spark requires Git, Node JS, NPM, and Bower.
 
 ## Getting Started
 
 ##### 1. Create a directory for your NodeJS site.
 ```
-mkdir staticspark
-cd static-spark
+mkdir my-app
+cd my-app
 ```
 
 ##### 2. Clone the repository into your folder structure.
@@ -38,9 +38,9 @@ cd public
 git clone https://github.com/madoublet/hashedit-start .
 ```
 
-##### 7. Run bower
+##### 7. Install Hashedit
 ```
-bower update
+bower install hashedit
 ```
 
 ##### 8. Start your server
