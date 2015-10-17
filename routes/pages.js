@@ -1,7 +1,9 @@
 var express = require('express');
 var fs = require('fs');
+var path = require('path');
 var cheerio = require('cheerio');
 var router = express.Router();
+var mkdirp = require('mkdirp');
 
 /**
   * Lists pages
@@ -27,20 +29,38 @@ router.get('/', function(req, res, next) {
   * @param {Object} res - http://expressjs.com/api.html#res
   * @param {Object} next - required for middleware
   */
-router.get('/add', function(req, res, next) {
+router.post('/add', function(req, res, next) {
   
   if(req.user){
-    var file = 'public/new.html';
   
-    // write file
-    fs.writeFile(file, 'Hello Node.js', function (err) {
-      if (err) {
-        throw err;
-      }
-      
-      console.log('It\'s saved!');
+    var params = req.body;
+  
+    var file = 'public/' + params.url;
+    
+    
+    // get directory from path
+    var dir = path.dirname(file);
+    
+    
+    mkdirp(dir, function (err) {
+        if (err) {
+          console.error(err)
+        }
+        else{
+        
+          // write file
+          fs.writeFile(file, 'Hello Node.js', function (err) {
+            if (err) {
+              throw err;
+            }
+            
+            console.log('It\'s saved!');
+          });
+          
+        }
+        
     });
-  
+    
     // send success
     res.sendStatus(200);
   }
