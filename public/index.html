@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
+    <meta name="description" content="This is a sample page showing how Hashedit works with Bootstrap.">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>Hashedit Bootstrap sample</title>
 
     <!-- Bootstrap core CSS -->
     <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -27,12 +27,6 @@ body {
   color: #5a5a5a;
 }
 
-    /* support for #edit */
-    body[hashedit-active] .navbar-wrapper {
-        top: 50px;    
-    }
-
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -44,6 +38,11 @@ body {
   left: 0;
   z-index: 20;
 }
+
+    /* support for #edit */
+    body[hashedit-active] .navbar-wrapper {
+        top: 50px;
+    }
 
 /* Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper > .container {
@@ -78,6 +77,7 @@ body {
   background-color: #777;
 }
 .carousel-inner > .item > img {
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
@@ -161,8 +161,8 @@ body {
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body id="main" hashedit hashedit-selector="#main">
-  
+  <body id="main">
+
     <div class="navbar-wrapper">
       <div class="container">
 
@@ -205,7 +205,7 @@ body {
 
     <!-- Carousel
     ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" hashedit="" hashedit-selector="#myCarousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -259,7 +259,7 @@ body {
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing">
+    <div id="mainContainer" class="container marketing" hashedit="" hashedit-selector="#mainContainer">
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
@@ -276,9 +276,10 @@ body {
           <p><a class="btn btn-default" href="#" role="button">View details &#xBB;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="column col-lg-4">
-          <img class="img-circle" src="images/desktop.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <img class="img-circle" src="images/bridge.png" alt="Generic placeholder image" width="140" height="140">
+
+          <h2>Heading</h2><p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+
           <p><a class="btn btn-default" href="#" role="button">View details &#xBB;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
@@ -291,7 +292,7 @@ body {
       <div class="row featurette">
         <div class="column col-md-7">
           <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It&apos;ll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">Lets try this out.</p><p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="column col-md-5">
           <img class="featurette-image img-responsive center-block" src="images/field.jpg" alt="Generic placeholder image">
@@ -315,10 +316,10 @@ body {
       <div class="row featurette">
         <div class="column col-md-7">
           <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">Yay! Checkmate!</p><p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="column col-md-5">
-          <img class="featurette-image img-responsive center-block" src="images/bridge.png" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive center-block " src="images/bridge.png" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -334,25 +335,31 @@ body {
       </footer>
 
     </div><!-- /.container -->
-    
-    <!-- #edit -->
-    <script>function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}</script>
-    <link type="text/css" href="/bower_components/hashedit/css/hashedit.css" rel="stylesheet">
-    <script src="/bower_components/hashedit/js/hashedit.js"></script>
-    
+
+    <!-- hashedit snippet -->
     <script>
-	
+        function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}</script>
+
+    <!-- fetch polyfill -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.0/fetch.min.js"></script>
+
+    <!-- hashedit  -->
+    <script src="/hashedit/dist/hashedit.0.1-min.js"></script>
+    <link type="text/css" href="/hashedit/dist/hashedit.0.1-min.css" rel="stylesheet">
+
+    <script>
+
     // initialize hashedit
     if(window.location.href.indexOf('#edit') != -1){
-    
+
       // setup hashedit
       hashedit.setup({
-        path: '/bower_components/hashedit/',
-        sortable: ['.column']  
+        path: '/hashedit/',
+        sortable: ['.column, .carousel-caption']
       });
-    
+
     }
-    
+
     // reload the page when hash changes to #edit
     window.onhashchange = function(){
         if(window.location.href.indexOf('#edit') != -1){
@@ -367,6 +374,6 @@ body {
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  
+
   </body>
 </html>

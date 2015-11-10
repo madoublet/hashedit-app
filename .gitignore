@@ -2,6 +2,7 @@
 logs
 *.log
 config.js
+realtor-kit/*
 credentials.md
 
 # Runtime data

@@ -1,6 +1,6 @@
 # Hashedit Spark
 
-Static Spark is an API backend for hashedit.io.  It provides authentication and features to manipulate your static site.  Static Spark requires Git, Node JS, NPM, and Bower.
+Hashedit Spark is an API backend for hashedit.io.  It provides authentication and features to manipulate your static site.  Hashedit Spark requires Git, Node JS, Nodemon, NPM, and Bower.
 
 ## Getting Started
 
@@ -27,13 +27,12 @@ nano config.js
 npm install
 ```
 
-##### 5. Install Hashedit
+##### 5. Install Dependencies
 ```
 bower install hashedit
 ```
 
 ##### 6. Start your server
 ```
-cd ..
 DEBUG=my-site npm start
 ```
