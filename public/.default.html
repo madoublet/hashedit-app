@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Sample Description">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Sample Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <style>
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+    /* support for #edit */
+    body[hashedit-active] .navbar-wrapper {
+        top: 50px;
+    }
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+#mainContainer{
+  margin: 75px auto;
+}
+
+footer{
+  margin-top: 25px;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+    </style>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body id="main">
+
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+    <div id="mainContainer" class="container marketing" hashedit="" hashedit-selector="#mainContainer">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="column col-lg-12">
+            <h1>New Page</h1>
+            <p>This is your new page!</p>
+        </div><!-- /.col-lg-12 -->
+     </div><!-- /.row -->
+
+
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&#xA9; 2014 Company, Inc. &#xB7; <a href="#">Privacy</a> &#xB7; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+    <!-- hashedit snippet -->
+    <script>
+        function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}</script>
+
+    <!-- fetch polyfill -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.0/fetch.min.js"></script>
+
+    <!-- dropzone -->
+    <script src="/hashedit/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <link type="text/css" href="/hashedit/bower_components/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+
+    <!-- sortable -->
+    <script src="/hashedit/bower_components/Sortable/Sortable.min.js"></script>
+
+    <!-- hashedit  -->
+    <script src="/hashedit/js/hashedit.js"></script>
+    <link type="text/css" href="/hashedit/css/hashedit.css" rel="stylesheet">
+
+    <script>
+
+    // initialize hashedit
+    if(window.location.href.indexOf('#edit') != -1){
+
+      // setup hashedit
+      hashedit.setup({
+        path: '/hashedit/',
+        sortable: ['.column, .carousel-caption']
+      });
+
+    }
+
+    // reload the page when hash changes to #edit
+    window.onhashchange = function(){
+        if(window.location.href.indexOf('#edit') != -1){
+            location.reload();
+        }
+    }
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

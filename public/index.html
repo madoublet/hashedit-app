@@ -337,15 +337,11 @@ body {
     </div><!-- /.container -->
 
     <!-- hashedit snippet -->
-    <script>
-        function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}</script>
-
-    <!-- fetch polyfill -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.0/fetch.min.js"></script>
+    <script>function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&location.reload()};</script>
 
     <!-- hashedit  -->
-    <script src="/bower_components/hashedit/dist/hashedit.0.1-min.js"></script>
-    <link type="text/css" href="/bower_components/hashedit/dist/hashedit.0.1-min.css" rel="stylesheet">
+    <script src="/bower_components/hashedit/dist/hashedit-min.js"></script>
+    <link type="text/css" href="/bower_components/hashedit/dist/hashedit-min.css" rel="stylesheet">
 
     <script>
 
@@ -360,12 +356,6 @@ body {
 
     }
 
-    // reload the page when hash changes to #edit
-    window.onhashchange = function(){
-        if(window.location.href.indexOf('#edit') != -1){
-            location.reload();
-        }
-    }
     </script>
 
 
