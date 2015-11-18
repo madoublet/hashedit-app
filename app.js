@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 // setup static directory
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/node_modules/hashedit',  express.static(__dirname + '/node_modules/hashedit'));
 
 // setup the auth
 staticKit.setupAuth(app, config);

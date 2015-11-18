@@ -20,8 +20,8 @@
     "mkdirp": "*",
     "readdirp": "*",
     "multiparty": "*",
-    "airtable": "~0.2.2",
-    "static-kit": "*"
+    "static-kit": "*",
+    "hashedit": "*"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

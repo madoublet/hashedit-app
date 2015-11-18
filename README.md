@@ -27,12 +27,7 @@ nano config.js
 npm install
 ```
 
-##### 5. Install Dependencies
-```
-bower install hashedit
-```
-
-##### 6. Start your server
+##### 5. Start your server
 ```
 DEBUG=my-site npm start
 ```
