@@ -1,8 +1,9 @@
-var exports = module.exports = {};  
+var exports = module.exports = {};
 
 // app configurations
 exports.app = {
-    "url": "https://my-hashedit-site.io"
+    "url": "https://my-hashedit-site.io",
+    "port": 3000
 };
 
 // setup google authentication
