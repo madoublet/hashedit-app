@@ -29,5 +29,5 @@ npm install
 
 ##### 5. Start your server
 ```
-DEBUG=my-site npm start
+node app.js
 ```
