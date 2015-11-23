@@ -3,11 +3,16 @@ var express = require('express'),
 	path = require('path'),
 	favicon = require('serve-favicon'),
 	url  = require('url'),
+	bodyParser = require('body-parser'),
 	staticKit = require('static-kit'),
 	config = require('./config');
 
 // setup express
 var app = express();
+
+// setup body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // setup static directory
 app.use(express.static(path.join(__dirname, 'public')));
