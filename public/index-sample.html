@@ -337,7 +337,9 @@ body {
     </div><!-- /.container -->
 
     <!-- hashedit snippet -->
-    <script>function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&location.reload()};</script>
+    <script>
+    	function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.pathname;console.log(key),null!=localStorage.getItem(key)&&write()}window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&location.reload()};
+    </script>
 
     <!-- hashedit  -->
     <script src="/node_modules/hashedit/dist/hashedit-min.js"></script>
