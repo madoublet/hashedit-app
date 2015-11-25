@@ -343,7 +343,6 @@ body {
 
     <!-- hashedit  -->
     <script src="/node_modules/hashedit/dist/hashedit-min.js"></script>
-    <link type="text/css" href="/node_modules/hashedit/dist/hashedit-min.css" rel="stylesheet">
 
     <script>
 
@@ -353,6 +352,7 @@ body {
       // setup hashedit
       hashedit.setup({
         path: '/node_modules/hashedit/',
+        stylesheet: '/node_modules/hashedit/dist/hashedit-min.css',
         sortable: ['.column, .carousel-caption']
       });
 
