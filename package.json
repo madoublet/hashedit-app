@@ -21,6 +21,7 @@
     "readdirp": "*",
     "multiparty": "*",
     "static-kit": "*",
+    "compression": "*",
     "hashedit": "*"
   },
   "devDependencies": {

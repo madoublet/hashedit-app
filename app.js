@@ -1,5 +1,6 @@
 // default express
 var express = require('express'),
+	compression = require('compression'),
 	path = require('path'),
 	favicon = require('serve-favicon'),
 	url  = require('url'),
@@ -11,6 +12,7 @@ var express = require('express'),
 var app = express();
 
 // setup body parser
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -19,10 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/node_modules/hashedit',  express.static(__dirname + '/node_modules/hashedit'));
 
 // setup the auth
-staticKit.setupAuth(app, config);
-
-// setup routes
-staticKit.setupRoutes(app);
+staticKit.setup(app, config);
 
 // handle 404
 app.use(function(req, res, next) {
@@ -35,14 +34,14 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    console.log('[Hashedit] error. STATUS: ' + err.status);
+    console.log('[Hashedit] error. STATUS: ' + err.status + ' URL: ' + req.url);
   });
 }
 
 // production error handler, no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  console.log('[Hashedit] error. STATUS: ' + err.status);
+  console.log('[Hashedit] error. STATUS: ' + err.status + ' URL: ' + req.url);
 });
 
 var server = app.listen(config.app.port, function () {
