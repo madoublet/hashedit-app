@@ -341,15 +341,16 @@ body {
     </script>
 
     <!-- hashedit  -->
-    <script src="/node_modules/hashedit/dist/hashedit-min.js"></script>
+    <script src="/hashedit/dist/hashedit-min.js"></script>
 
     <script>
 
     // setup hashedit
     hashedit.setup({
-        path: '/node_modules/hashedit/',
-        stylesheet: '/node_modules/hashedit/dist/hashedit-min.css',
-        sortable: ['.column, .carousel-caption']
+        path: '/hashedit/',
+        stylesheet: ['/hashedit/dist/hashedit-min.css'],
+        sortable: ['.column, .carousel-caption'],
+        demo: true
     });
 
     </script>
