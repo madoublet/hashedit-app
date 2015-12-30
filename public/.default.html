@@ -149,9 +149,6 @@ footer{
         </div><!-- /.col-lg-12 -->
      </div><!-- /.row -->
 
-
-
-
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -162,41 +159,22 @@ footer{
 
     <!-- hashedit snippet -->
     <script>
-        function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.href;null!=localStorage.getItem(key)&&write()}</script>
-
-    <!-- fetch polyfill -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.0/fetch.min.js"></script>
-
-    <!-- dropzone -->
-    <script src="/hashedit/bower_components/dropzone/dist/min/dropzone.min.js"></script>
-    <link type="text/css" href="/hashedit/bower_components/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
-
-    <!-- sortable -->
-    <script src="/hashedit/bower_components/Sortable/Sortable.min.js"></script>
+    	function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.pathname;console.log(key),null!=localStorage.getItem(key)&&write()}window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&location.reload()};
+    </script>
 
     <!-- hashedit  -->
-    <script src="/hashedit/js/hashedit.js"></script>
-    <link type="text/css" href="/hashedit/css/hashedit.css" rel="stylesheet">
+    <script src="/node_modules/hashedit/dist/hashedit-min.js"></script>
+    <script src="/api/settings/menu"></script>
 
     <script>
 
-    // initialize hashedit
-    if(window.location.href.indexOf('#edit') != -1){
-
-      // setup hashedit
-      hashedit.setup({
-        path: '/hashedit/',
+    // setup hashedit
+    hashedit.setup({
+        path: '/node_modules/hashedit/',
+        stylesheet: ['/node_modules/hashedit/dist/hashedit-min.css'],
         sortable: ['.column, .carousel-caption']
-      });
+    });
 
-    }
-
-    // reload the page when hash changes to #edit
-    window.onhashchange = function(){
-        if(window.location.href.indexOf('#edit') != -1){
-            location.reload();
-        }
-    }
     </script>
 
 
