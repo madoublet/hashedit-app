@@ -4,6 +4,8 @@ logs
 config.js
 realtor-kit/*
 credentials.md
+data/users.json
+data/forms.json
 
 # Runtime data
 pids
