@@ -20,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/node_modules/hashedit',  express.static(__dirname + '/node_modules/hashedit'));
 
+// set configuration
+app.set('config', config);
+
 // setup the auth
 staticKit.setup(app, config);
 

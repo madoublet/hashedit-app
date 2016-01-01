@@ -87,16 +87,6 @@ if(program.setup){
         console.log(e);
     }
 
-    // run npm install
-    console.log('[hashedit] running npm install');
-
-    // copy users.json
-    output = child_process.execSync('npm install');
-
-    if(output){
-        console.log('[hashedit] console output >>> ' + output);
-    }
-
 }
 
 // add users
