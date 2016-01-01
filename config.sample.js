@@ -26,6 +26,10 @@ exports.drawer = {
     {
         text: 'Pages',
         href: '/admin/pages'
+    },
+    {
+        text: 'Logout',
+        href: '/logout'
     }
   ]
 };
