@@ -6,7 +6,8 @@ var express = require('express'),
 	url  = require('url'),
 	bodyParser = require('body-parser'),
 	staticKit = require('static-kit'),
-	config = require('./config');
+	config = require('./config'),
+	edit = require('./edit');
 
 // setup express
 var app = express();
@@ -22,6 +23,9 @@ app.use('/node_modules/hashedit',  express.static(__dirname + '/node_modules/has
 
 // set configuration
 app.set('config', config);
+
+// setup edit
+edit.setup(app, config);
 
 // setup the auth
 staticKit.setup(app, config);

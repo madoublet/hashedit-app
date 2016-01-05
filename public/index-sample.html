@@ -160,7 +160,7 @@ body {
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body id="main">
+  <body id="main" hashedit-sortable=".column, .carousel-caption">
 
     <div class="navbar-wrapper">
       <div class="container">
@@ -336,24 +336,7 @@ body {
     </div><!-- /.container -->
 
     <!-- hashedit snippet -->
-    <script hashedit-exclude>
-    	function write(){html=localStorage.getItem(key),document.body.innerHTML=html}if(-1!=window.location.href.indexOf("#edit")){var key=window.location.pathname;console.log(key),null!=localStorage.getItem(key)&&write()}window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&location.reload()};
-    </script>
-
-    <!-- hashedit  -->
-    <script src="/node_modules/hashedit/dist/hashedit-min.js"></script>
-    <script src="/api/settings/menu"></script>
-
-    <script>
-
-    // setup hashedit
-    hashedit.setup({
-        path: '/node_modules/hashedit/',
-        stylesheet: ['/node_modules/hashedit/dist/hashedit-min.css'],
-        sortable: ['.column, .carousel-caption']
-    });
-
-    </script>
+    <script>var path=window.location.pathname;-1!=window.location.href.indexOf("#edit")&&(window.location="/edit?url="+path),window.onhashchange=function(){-1!=window.location.href.indexOf("#edit")&&(window.location="/edit?url="+path)};hashedit-sortable=".column, .carousel-caption"</script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
