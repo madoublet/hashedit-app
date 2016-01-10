@@ -21,7 +21,17 @@
 
 console.log('[hashedit] welcome to #edit!');
 
-var path, stats, config, url, json, user, users, hash, output;
+var path, stats, stats2, config, url, json, user, users, hash, output;
+
+// check if file exists
+function fileExists(filePath){
+    try{
+        return fs.statSync(filePath).isFile();
+    }
+    catch (err){
+        return false;
+    }
+}
 
 // run setup
 if(program.setup){
@@ -29,62 +39,40 @@ if(program.setup){
     url = program.setup;
 
     // copy config.js
-    path = './config.js';
+    path = 'config.js';
 
-    try {
-        // query the entry
-        stats = fs.lstatSync(path);
-
-        // is it a file
-        if (stats.isFile()) {
-            console.log('[hashedit] config.js exists');
-        }
-        else{
-            console.log('[hashedit] creating config.js');
-
-            config = fs.readFileSync('./config.sample.js', 'utf8');
-            config = config.replace('https://my-hashedit-site.io', url);
-
-            // save config file
-            fs.writeFile(path, config, function (err) {
-                if (err) {
-                  console.log('[hashedit] error >>> ' + error);
-                }
-            });
-        }
-
+    if(fileExists(path)){
+        console.log('[hashedit] config.js exists');
     }
-    catch (e) {
-        console.log('[hashedit.error]');
-        console.log(e);
+    else{
+        console.log('[hashedit] creating config.js');
+
+        config = fs.readFileSync('./config.sample.js', 'utf8');
+        config = config.replace('https://my-hashedit-site.io', url);
+
+        // save config file
+        fs.writeFile(path, config, function (err) {
+            if (err) {
+              console.log('[hashedit] error >>> ' + error);
+            }
+        });
     }
 
     // copy data/users.json
-    path = './data/users.json';
+    path = 'data/users.json';
 
-    try {
-        // query the entry
-        stats = fs.lstatSync(path);
-
-        // is it a file
-        if (stats.isFile()) {
-            console.log('[hashedit] data/users.json exists');
-        }
-        else{
-            console.log('[hashedit] creating data/users.json');
-
-            // copy users.json
-            output = child_process.execSync('cp data/users.sample.json data/users.json');
-
-            if(output){
-                console.log('[hashedit] console output >>> ' + output);
-            }
-
-        }
+    if(fileExists(path)){
+        console.log('[hashedit] data/users.json exists');
     }
-    catch (e) {
-        console.log('[hashedit.error]');
-        console.log(e);
+    else{
+        console.log('[hashedit] creating data/users.json');
+
+        // copy users.json
+        output = child_process.execSync('cp data/users.sample.json data/users.json');
+
+        if(output){
+            console.log('[hashedit] console output >>> ' + output);
+        }
     }
 
 }
