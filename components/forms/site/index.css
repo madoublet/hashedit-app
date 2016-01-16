@@ -1,0 +1,65 @@
+/* client */
+[hashedit-form] label{
+    display: block;
+    font-weight: normal;
+}
+
+[hashedit-form] .field{
+    margin: 0 0 15px 0;
+}
+
+[hashedit-form] input[type=text], [hashedit-form] input[type=email], [hashedit-form] input[type=phone], [hashedit-form] select, [hashedit-form] textarea{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+}
+
+[hashedit-form] input[type=submit]{
+    box-sizing: border-box;
+    border: 1px solid #888;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+    vertical-align: baseline;
+}
+
+[hashedit-form] .hashedit-message{
+    display: none;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin-left: 20px;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: baseline;
+}
+
+  [hashedit-form] .hashedit-message svg{
+      fill: currentColor;
+      height: 30px;
+      margin-bottom: -8px;
+      margin-right: 10px;
+  }
+
+  [hashedit-form] .hashedit-message[active]{
+      display: inline-block;
+  }
+
+[hashedit-form] [hashedit-success]{
+    color: #fff;
+    background: #08B168;
+}
+
+[hashedit-form] [hashedit-failure]{
+    color: #fff;
+    background: #CF4647;
+}
+
+/* hashedit updates */
+body .hashedit-modal .hashedit-list-item[read=true]{
+    background-color: #f8f8f8;
+}
+
+body .hashedit-modal .hashedit-list-item[read=true] h2{
+    color: #888;
+}

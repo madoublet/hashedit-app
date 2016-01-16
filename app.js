@@ -5,9 +5,14 @@ var express = require('express'),
 	favicon = require('serve-favicon'),
 	url  = require('url'),
 	bodyParser = require('body-parser'),
-	staticKit = require('static-kit'),
+	formKit = require('form-kit'),
 	config = require('./config'),
-	edit = require('./edit');
+	edit = require('./components/edit'),
+	auth = require('./components/auth'),
+	pages = require('./components/pages'),
+	forms = require('./components/forms'),
+    images = require('./components/images'),
+    settings = require('./components/settings');
 
 // setup express
 var app = express();
@@ -19,6 +24,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // setup static directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// setup admin
+app.use('/admin/pages',  express.static(__dirname + '/components/pages/client'));
+app.use('/admin/forms',  express.static(__dirname + '/components/forms/client'));
+
+// setup site
+app.use('/hashedit/forms',  express.static(__dirname + '/components/forms/site'));
+
+// setup hashedit
 app.use('/node_modules/hashedit',  express.static(__dirname + '/node_modules/hashedit'));
 
 // set configuration
@@ -27,8 +41,14 @@ app.set('config', config);
 // setup edit
 edit.setup(app, config);
 
-// setup the auth
-staticKit.setup(app, config);
+// setup auth
+auth.setup(app, config);
+
+// setup routes
+app.use('/api/pages', pages);
+app.use('/api/images', images);
+app.use('/api/settings', settings);
+app.use('/api/forms', forms);
 
 // handle 404
 app.use(function(req, res, next) {

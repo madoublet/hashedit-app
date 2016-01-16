@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+      <title>Pages</title>
+
+      <!-- meta -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+      <!-- font -->
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+      <!-- css -->
+      <link href="/node_modules/hashedit/css/hashedit.app.css" rel="stylesheet" type="text/css">
+      <link href="/node_modules/hashedit/css/hashedit.standalone.css" rel="stylesheet" type="text/css">
+
+    </head>
+
+    <body id="hashedit-view">
+
+        <menu class="hashedit-menu">
+            <button class="hashedit-more"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><g><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></g></svg></button>
+
+            <h1>Pages</h1>
+
+            <button class="hashedit-add" hashedit-add-page><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><g><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></g></svg></button>
+
+        </menu>
+
+        <div id="hashedit-list" class="hashedit-list"></div>
+        <!-- /#hashedit-list -->
+
+        <div id="hashedit-form" class="hashedit-modal">
+
+            <h2>Details</h2>
+
+            <div id="hashedit-details-list" class="hashedit-list">
+                <div class="hashedit-list-item">Placeholder</div>
+            </div>
+
+            <div class="actions">
+                <a class="primary" hashedit-cancel-modal>Cancel</a>
+            </div>
+
+        </div>
+        <!-- /#hashedit-form -->
+
+        <div id="hashedit-page-settings" class="hashedit-modal">
+
+            <div class="hashedit-modal-body">
+
+                <h2>Settings</h2>
+
+            	<label>Title</label>
+            	<input id="hashedit-page-title" type="text" maxlength="128">
+
+                <label>Description</label>
+                <input id="hashedit-page-desc" type="text" maxlength="128">
+
+                <div class="actions">
+                    <a hashedit-cancel-modal>Cancel</a>
+                    <a hashedit-apply-page-settings class="primary">Apply</a>
+                </div>
+
+            </div>
+            <!-- /.context-body -->
+
+        </div>
+        <!-- /#hashedit-page-settings -->
+
+        <div id="hashedit-add-page" class="hashedit-modal">
+
+            <div class="hashedit-modal-body">
+
+                <h2>Add Page</h2>
+
+                <label>Path</label>
+              	<select id="hashedit-add-page-path" type="text"></select>
+
+              	<label>URL</label>
+              	<input id="hashedit-add-page-url" type="text" maxlength="128" placeholder="new-page">
+
+              	<label>Title</label>
+            	<input id="hashedit-add-page-title" type="text" maxlength="128">
+
+                <label>Description</label>
+                <input id="hashedit-add-page-desc" type="text" maxlength="128">
+
+                <div class="actions">
+                    <a hashedit-cancel-modal>Cancel</a>
+                    <a hashedit-add-page-create class="primary">Create</a>
+                </div>
+
+            </div>
+            <!-- /.context-body -->
+
+        </div>
+        <!-- /#hashedit-add-page -->
+
+        <div id="hashedit-remove-page" class="hashedit-modal">
+
+            <div class="hashedit-modal-body">
+
+                <h2>Remove Page</h2>
+
+                <p>Are you sure you want to remove this page?</p>
+
+                <div class="actions">
+                    <a hashedit-cancel-modal>Cancel</a>
+                    <a hashedit-remove-page-confirm class="primary">Remove</a>
+                </div>
+
+            </div>
+            <!-- /.context-body -->
+
+        </div>
+        <!-- /#hashedit-add-page -->
+
+        <!-- cdn (replace with build later) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+        <!-- common js -->
+        <script src="/node_modules/hashedit/js/fetch.min.js"></script>
+        <script src="/node_modules/hashedit/js/hashedit.app.js"></script>
+
+        <!-- menu -->
+        <script src="/api/settings/menu"></script>
+
+        <!-- form js -->
+        <script src="/admin/pages/index.js"></script>
+
+        <script>
+            pages.setup();
+        </script>
+
+    </body>
+</html>
