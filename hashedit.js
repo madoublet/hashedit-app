@@ -21,7 +21,7 @@
 
 console.log('[hashedit] welcome to #edit!');
 
-var path, stats, stats2, config, url, json, user, users, hash, output;
+var path, stats, stats2, config, url, json, user, users, hash, output, id;
 
 // check if file exists
 function fileExists(filePath){
@@ -90,12 +90,29 @@ if(program.email){
 
         // create hashed password
         hash = bcrypt.hashSync(program.password);
+        
+        // create a guid
+        function guid () {
+        
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        
+        // create a guid for new user
+        id = guid();
 
         // create user
         user = {
+            "id": id,
         	"email": program.email,
         	"password": hash,
-        	"provider": "local"
+        	"provider": "local",
+        	"date": new Date()
         }
 
         // push user

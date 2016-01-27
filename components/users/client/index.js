@@ -2,7 +2,7 @@
  * Displays a list of pages
  * @author: Matthew Smith
  */
-var pages = (function () {
+var users = (function () {
 
     'use strict';
 
@@ -16,17 +16,17 @@ var pages = (function () {
         currentIndex: null,
 
         // api endpoints
-        listUrl: '/api/pages/list/details',
-        pageSettingsUrl: '/api/pages/settings',
-        addPageUrl: '/api/pages/add',
-        removeUrl: '/api/pages/remove',
+        listUrl: '/api/users/list',
+        addUrl: '/api/users/add',
+        editUrl: '/api/users/edit',
+        removeUrl: '/api/users/remove',
 
         /**
          * Setup app
          */
         setup: function(){
 
-            var x, y, modals, cancels;
+            var x, y, modals, cancels, add;
 
             fetch(hashedit.app.authUrl, {
                     credentials: 'include'
@@ -41,13 +41,13 @@ var pages = (function () {
                     } else {
 
                         // create list
-                        pages.createList();
+                        users.createList();
 
                         // setup events
-                        pages.setupListEvents();
+                        users.setupListEvents();
 
                         // setup modal events
-                        pages.setupModalEvents();
+                        users.setupModalEvents();
 
                         // setup drawer
                         hashedit.app.setupDrawer({page: false, app: true});
@@ -59,7 +59,7 @@ var pages = (function () {
                         cancels = document.querySelectorAll('[hashedit-cancel-modal]');
 
                         for(x=0; x<cancels.length; x++){
-                            cancels[x].addEventListener('click', function(){
+                            cancels[x].addEventListener('click', function() {
 
                                 modals = document.querySelectorAll('.hashedit-modal');
 
@@ -69,6 +69,16 @@ var pages = (function () {
 
                             });
                         }
+                        
+                        // add modal
+                        document.querySelector('[hashedit-show-add]').addEventListener('click', function() {
+                            document.getElementById('hashedit-add-user-modal').setAttribute('visible', '');
+                            
+                            // set defaults
+                            document.getElementById('hashedit-add-user-provider').value = 'local';
+                            document.getElementById('hashedit-add-user-email').value = '';
+                            document.getElementById('hashedit-add-user-password').value = '';
+                        });
 
                     }
 
@@ -81,52 +91,36 @@ var pages = (function () {
          */
         setupModalEvents: function(){
 
-            var path, url, title, description, params, xhr, item;
+            var provider, email, password, params, xhr, item;
 
             // creates a page
-            document.querySelector('[hashedit-add-page-create]').addEventListener('click', function() {
+            document.querySelector('[hashedit-add-user-create]').addEventListener('click', function() {
 
                 if (hashedit.demo === true) {
 
-                    hashedit.app.showToast('Cannot add page in demo mode', 'failure');
+                    hashedit.app.showToast('Cannot add user in demo mode', 'failure');
 
                 } else {
 
                     // get params
-                    path = document.getElementById('hashedit-add-page-path').value;
-                    url = document.getElementById('hashedit-add-page-url').value;
-                    title = document.getElementById('hashedit-add-page-title').value;
-                    description = document.getElementById('hashedit-add-page-desc').value;
+                    provider = document.getElementById('hashedit-add-user-provider').value;
+                    email = document.getElementById('hashedit-add-user-email').value;
+                    password = document.getElementById('hashedit-add-user-password').value;
 
-                    // cleanup url
-                    url = url.trim();
-
-                    if(url !== ''){
-                        // cleanup url
-                        url = hashedit.app.replaceAll(url, '.html', '');
-                        url = hashedit.app.replaceAll(url, '.htm', '');
-                        url = hashedit.app.replaceAll(url, '.', '-');
-                        url = hashedit.app.replaceAll(url, ' ', '-');
-                        url = hashedit.app.replaceAll(url, '/', '-');
-
-                        // append path to url
-                        url = path + '/' + url + '.html';
-
-                        // fix duplicates
-                        url = hashedit.app.replaceAll(url, '//', '/');
-
+                    if(email !== ''){
+                        
                         // set params
                         params = {
-                            'url': url,
-                            'title': title,
-                            'description': description
+                            'provider': provider,
+                            'email': email,
+                            'password': password
                         };
 
-                        if (pages.addPageUrl) {
+                        if (users.addUrl) {
 
                             // construct an HTTP request
                             xhr = new XMLHttpRequest();
-                            xhr.open('post', pages.addPageUrl, true);
+                            xhr.open('post', users.addUrl, true);
                             xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
                             // send the collected data as JSON
@@ -135,13 +129,13 @@ var pages = (function () {
                             xhr.onloadend = function() {
 
                                 // hide modal
-                                document.getElementById('hashedit-add-page-modal').removeAttribute('visible');
+                                document.getElementById('hashedit-add-user-modal').removeAttribute('visible');
 
                                 // log success
-                                hashedit.app.showToast('Page added at ' + url, 'success');
+                                hashedit.app.showToast('User added successfully', 'success');
 
                                 // reload list
-                                pages.createList();
+                                users.createList();
 
                             };
 
@@ -149,37 +143,45 @@ var pages = (function () {
                     }
                     else{
                         // show success
-                        hashedit.app.showToast('URL required', 'failure');
+                        hashedit.app.showToast('Email required', 'failure');
                     }
                 }
 
             });
 
-            // apply page settings
-            document.querySelector('[hashedit-apply-page-settings]').addEventListener('click', function() {
+            // handle change of select
+            document.querySelector('#hashedit-add-user-provider').addEventListener('change', function(e) {
+
+                var provider = e.target.value;
+
+                if(provider === 'local') {
+                    document.getElementById('hashedit-add-user-password-display').style.display = 'block';
+                }
+                else{
+                    document.getElementById('hashedit-add-user-password-display').style.display = 'none';
+                }
+
+            });
+
+            // remove user
+            document.querySelector('[hashedit-remove-user-confirm]').addEventListener('click', function() {
 
                 if (hashedit.demo === true) {
 
-                    hashedit.app.showToast('Cannot save settings in demo mode', 'failure');
+                    hashedit.app.showToast('Cannot remove user in demo mode', 'failure');
 
                 } else {
 
-                    // get params
-                    title = document.getElementById('hashedit-page-title').value;
-                    description = document.getElementById('hashedit-page-desc').value;
-
                     // set params
                     params = {
-                        'title': title,
-                        'description': description,
-                        'url': pages.list[pages.currentIndex].url
+                        'id': users.list[users.currentIndex].id
                     };
-
-                    if (pages.pageSettingsUrl) {
+                    
+                    if (users.removeUrl) {
 
                         // construct an HTTP request
                         xhr = new XMLHttpRequest();
-                        xhr.open('post', pages.pageSettingsUrl, true);
+                        xhr.open('post', users.removeUrl, true);
                         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
                         // send the collected data as JSON
@@ -188,13 +190,13 @@ var pages = (function () {
                         xhr.onloadend = function() {
 
                             // hide modal
-                            document.getElementById('hashedit-page-settings-modal').removeAttribute('visible');
+                            document.getElementById('hashedit-remove-user-modal').removeAttribute('visible');
 
                             // show success
-                            hashedit.app.showToast('Settings updated successfully!', 'success');
+                            hashedit.app.showToast('User removed successfully!', 'success');
 
                             // reload list
-                            pages.createList();
+                            users.createList();
 
                         };
 
@@ -203,26 +205,28 @@ var pages = (function () {
 
 
             });
-
-            // apply page settings
-            document.querySelector('[hashedit-remove-page-confirm]').addEventListener('click', function() {
+            
+            // edit user
+            document.querySelector('[hashedit-edit-user-update]').addEventListener('click', function() {
 
                 if (hashedit.demo === true) {
 
-                    hashedit.app.showToast('Cannot remove page in demo mode', 'failure');
+                    hashedit.app.showToast('Cannot edit user in demo mode', 'failure');
 
                 } else {
 
                     // set params
                     params = {
-                        'url': pages.list[pages.currentIndex].url
+                        'id': users.list[users.currentIndex].id,
+                        'email': document.getElementById('hashedit-edit-user-email').value,
+                        'password': document.getElementById('hashedit-edit-user-password').value
                     };
-
-                    if (pages.removeUrl) {
+                    
+                    if (users.editUrl) {
 
                         // construct an HTTP request
                         xhr = new XMLHttpRequest();
-                        xhr.open('post', pages.removeUrl, true);
+                        xhr.open('post', users.editUrl, true);
                         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
                         // send the collected data as JSON
@@ -231,13 +235,13 @@ var pages = (function () {
                         xhr.onloadend = function() {
 
                             // hide modal
-                            document.getElementById('hashedit-remove-page-modal').removeAttribute('visible');
+                            document.getElementById('hashedit-edit-user-modal').removeAttribute('visible');
 
                             // show success
-                            hashedit.app.showToast('Page removed successfully!', 'success');
+                            hashedit.app.showToast('User updated successfully!', 'success');
 
                             // reload list
-                            pages.createList();
+                            users.createList();
 
                         };
 
@@ -274,17 +278,26 @@ var pages = (function () {
                     index = item.getAttribute('data-index');
 
                     // set current index
-                    pages.currentIndex = index;
+                    users.currentIndex = index;
 
-                    if (e.target.hasAttribute('hashedit-remove-page') === true) {
-                        document.getElementById('hashedit-remove-page-modal').setAttribute('visible', '');
+                    if (e.target.hasAttribute('hashedit-remove-user') === true) {
+                        document.getElementById('hashedit-remove-user-modal').setAttribute('visible', '');
                     }
-                    else if (e.target.hasAttribute('hashedit-page-settings') === true) {
+                    else if (e.target.hasAttribute('hashedit-edit-user') === true) {
 
-                        document.getElementById('hashedit-page-title').value = pages.list[index].title;
-                        document.getElementById('hashedit-page-desc').value = pages.list[index].description;
+                        var provider = users.list[index].provider;
 
-                        document.getElementById('hashedit-page-settings-modal').setAttribute('visible', '');
+                        document.getElementById('hashedit-edit-user-email').value = users.list[index].email;
+                        document.getElementById('hashedit-edit-user-password').setAttribute('value', 'temppassword');
+
+                        if(provider === 'local') {
+                            document.getElementById('hashedit-edit-user-password-display').style.display = 'block';
+                        }
+                        else{
+                            document.getElementById('hashedit-edit-user-password-display').style.display = 'none';
+                        }
+
+                        document.getElementById('hashedit-edit-user-modal').setAttribute('visible', '');
                     }
                     else{
 
@@ -313,10 +326,10 @@ var pages = (function () {
 
             var list, item, html, x;
 
-            console.log('[form-kit] create list');
+            console.log('[hashedit-users] create list');
 
             // fetch list from server
-            fetch(pages.listUrl, {
+            fetch(users.listUrl, {
                 credentials: 'include'
             })
             .then(function(response) {
@@ -333,7 +346,7 @@ var pages = (function () {
                 });
 
                 // set list to value
-                pages.list = json;
+                users.list = json;
 
                 list = document.getElementById('hashedit-list');
                 list.innerHTML = '';
@@ -342,22 +355,18 @@ var pages = (function () {
                     item = document.createElement('div');
 
                     if(json[x].image != ''){
-                        item.setAttribute('class', 'hashedit-list-item hashedit-has-image');
+                        item.setAttribute('class', 'hashedit-list-item');
                     }
                     else{
                         item.setAttribute('class', 'hashedit-list-item');
                     }
 
                     // create html
-                    html = '<h2><span class="primary">' + json[x].title + '</span><span class="secondary">' + moment(json[x].lastModified).fromNow() + '</span></h2>';
-                    html += '<small>' + json[x].url + '</small>';
-                    html += '<p>' + json[x].description + '</p>';
+                    html = '<h2><span class="primary">' + json[x].email + '</span><span class="secondary">' + moment(json[x].date).fromNow() + '</span></h2>';
+                    html += '<small>' + json[x].provider + '</small>';
 
-                    if(json[x].image != ''){
-                        html += '<div class="image" style="background-image: url(' + json[x].image + ')"></div>';
-                    }
 
-                    html += '<div class="hashedit-list-actions"><a hashedit-remove-page>Remove</a> <a hashedit-page-settings>Settings</a> <a href="' + json[x].editUrl + '" class="primary">Edit</a></div>';
+                    html += '<div class="hashedit-list-actions"><a hashedit-remove-user>Remove</a> <a hashedit-edit-user class="primary">Edit</a></div>';
 
                     item.innerHTML = html;
                     item.setAttribute('data-index', x);
@@ -365,7 +374,7 @@ var pages = (function () {
                     list.appendChild(item);
                 }
 
-                pages.listLoaded = true;
+                users.listLoaded = true;
 
             }).catch(function(ex) {
                 console.log('parsing failed', ex);

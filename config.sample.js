@@ -28,6 +28,14 @@ exports.drawer = {
         href: '/admin/pages'
     },
     {
+        text: 'Users',
+        href: '/admin/users'
+    },
+    {
+        text: 'Form Submissions',
+        href: '/admin/forms'
+    },
+    {
         text: 'Logout',
         href: '/logout'
     }

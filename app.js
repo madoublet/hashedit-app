@@ -5,11 +5,11 @@ var express = require('express'),
 	favicon = require('serve-favicon'),
 	url  = require('url'),
 	bodyParser = require('body-parser'),
-	formKit = require('form-kit'),
 	config = require('./config'),
 	edit = require('./components/edit'),
 	auth = require('./components/auth'),
 	pages = require('./components/pages'),
+	users = require('./components/users'),
 	forms = require('./components/forms'),
     images = require('./components/images'),
     settings = require('./components/settings');
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // setup admin
 app.use('/admin/pages',  express.static(__dirname + '/components/pages/client'));
+app.use('/admin/users',  express.static(__dirname + '/components/users/client'));
 app.use('/admin/forms',  express.static(__dirname + '/components/forms/client'));
 
 // setup site
@@ -46,6 +47,7 @@ auth.setup(app, config);
 
 // setup routes
 app.use('/api/pages', pages);
+app.use('/api/users', users);
 app.use('/api/images', images);
 app.use('/api/settings', settings);
 app.use('/api/forms', forms);

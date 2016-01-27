@@ -22,8 +22,6 @@ router.get('/list', function(req, res, next) {
 
     fields = [];
 
-    console.log(req.user);
-
     if(req.user){
 
         // read the file
@@ -46,7 +44,7 @@ router.get('/list', function(req, res, next) {
 });
 
 /**
-  * Save form
+  * Saves a form
   * @param {Object} req - http://expressjs.com/api.html#req
   * @param {Object} res - http://expressjs.com/api.html#res
   * @param {Object} next - required for middleware
@@ -148,7 +146,7 @@ router.post('/save', function(req, res, next) {
 });
 
 /**
-  * Save form
+  * Read form
   * @param {Object} req - http://expressjs.com/api.html#req
   * @param {Object} res - http://expressjs.com/api.html#res
   * @param {Object} next - required for middleware

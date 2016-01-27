@@ -59,7 +59,7 @@ var forms = (function () {
             cancel = document.querySelector('[hashedit-cancel-modal]');
 
             cancel.addEventListener('click',  function(e){
-                document.getElementById('hashedit-form').removeAttribute('visible');
+                document.getElementById('hashedit-form-modal').removeAttribute('visible');
             });
 
             // handle click on images list
@@ -89,8 +89,6 @@ var forms = (function () {
                                 id: forms.list[i].id
                             }
 
-                            console.log('id=' + forms.list[i].id);
-
                             // construct an HTTP request
                             xhr = new XMLHttpRequest();
                             xhr.open('post', forms.readURL, true);
@@ -118,7 +116,7 @@ var forms = (function () {
                         details.innerHTML = html;
 
                         // show modal
-                        document.getElementById('hashedit-form').setAttribute('visible', '');
+                        document.getElementById('hashedit-form-modal').setAttribute('visible', '');
                     }
 
                 });
